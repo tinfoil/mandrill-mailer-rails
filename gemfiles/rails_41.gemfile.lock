@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ../
   specs:
     mandrill-mailer-rails (0.0.1)
       mandrill-api
@@ -110,6 +110,7 @@ PLATFORMS
 DEPENDENCIES
   appraisal
   mandrill-mailer-rails!
+  rails (~> 4.1)
   rake
   rspec-mocks
   rspec-rails

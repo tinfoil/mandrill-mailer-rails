@@ -13,7 +13,10 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_dependency('mandrill-api')
-  s.add_dependency('rails')
+  s.add_dependency('rails', '> 3.0')
 
   s.add_development_dependency('rake')
+  s.add_development_dependency('rspec-rails')
+  s.add_development_dependency('rspec-mocks')
+  s.add_development_dependency('appraisal')
 end

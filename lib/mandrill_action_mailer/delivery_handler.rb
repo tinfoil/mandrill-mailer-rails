@@ -16,16 +16,26 @@ module MandrillActionMailer
         :track_opens => settings[:track_opens],
         :track_clicks => settings[:track_clicks],
         :subject => message.subject,
-        :from_name => (message[:from_name].nil? || message[:from_name].value.blank?) ? nil : message[:from_name].value,
         :from_email => message.from.first,
         :to => message.to.map { |email| { :email => email, :name => email } },
-        :headers => { 'Reply-To' => message.reply_to.blank? ? nil : message.reply_to },
-        :bcc_address  => message.bcc ? message.bcc.first : nil,
       }
+
+      if !(message[:from_name].nil? || message[:from_name].value.blank?)
+        message_payload[:from_name] = message[:from_name].value
+      end
+
+      if !message.reply_to.blank?
+        message_payload[:headers] ||= {}
+        message_payload[:headers]['Reply-To'] = message.reply_to.first
+      end
+
+      if !message.bcc.blank?
+        message_payload[:bcc_address] = message.bcc.first
+      end
 
       MIME_TYPES.keys.each do |format|
         content = content_for(message, format)
-        message_payload[format] = content.to_s if content
+        message_payload[format] = content.to_s unless content.blank?
       end
 
       MandrillActionMailer.client.messages.send(message_payload)

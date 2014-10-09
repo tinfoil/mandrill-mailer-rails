@@ -1,5 +1,7 @@
 # mandrill-mailer-rails
 
+[![Build Status](https://travis-ci.org/bsedat/mandrill-mailer-rails.svg)](https://travis-ci.org/bsedat/mandrill-mailer-rails)
+
 Handler for Rails' ActionMailer to send emails through Mandrill.
 
 ## Installation

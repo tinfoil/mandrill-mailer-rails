@@ -30,6 +30,8 @@ TestRailsApp::Application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :mandrill
+  config.mandrill_action_mailer.track_opens = true
+  config.mandrill_action_mailer.track_clicks = false
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

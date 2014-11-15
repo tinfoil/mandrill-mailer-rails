@@ -1,6 +1,6 @@
 module MandrillActionMailer
   class DeliveryHandler
-    attr_accessor :settings
+    attr_accessor :settings, :result
 
     MIME_TYPES = {
       :html => "text/html",
@@ -8,7 +8,10 @@ module MandrillActionMailer
     }.freeze
 
     def initialize(options={})
-      self.settings = { :track_opens => MandrillActionMailer.config.track_opens, :track_clicks => MandrillActionMailer.config.track_clicks }.merge(options)
+      self.settings = {
+        :track_opens => MandrillActionMailer.config.track_opens,
+        :track_clicks => MandrillActionMailer.config.track_clicks
+      }.merge(options)
     end
 
     def deliver!(message)
@@ -38,7 +41,7 @@ module MandrillActionMailer
         message_payload[format] = content.to_s unless content.blank?
       end
 
-      MandrillActionMailer.client.messages.send(message_payload)
+      self.result = MandrillActionMailer.client.messages.send(message_payload)
     end
 
     private

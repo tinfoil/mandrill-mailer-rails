@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mandrill-mailer-rails (0.0.1)
+    mandrill-mailer-rails (1.0.0)
       mandrill-api
       rails (> 3.0)
 
@@ -42,7 +42,7 @@ GEM
     builder (3.2.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    excon (0.40.0)
+    excon (0.42.1)
     hike (1.2.3)
     i18n (0.6.11)
     json (1.8.1)
@@ -51,7 +51,7 @@ GEM
     mandrill-api (1.0.52)
       excon (>= 0.16.0, < 1.0)
       json (>= 1.7.7, < 2.0)
-    mime-types (2.4.1)
+    mime-types (2.4.3)
     minitest (5.4.2)
     multi_json (1.10.1)
     rack (1.5.2)

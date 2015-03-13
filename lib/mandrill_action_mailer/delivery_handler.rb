@@ -7,6 +7,8 @@ module MandrillActionMailer
       :text => "text/plain"
     }.freeze
 
+    FULL_EMAIL_REGEX = /\A\s*(.+?)\s*<\s*(?:[^>]+)\s*>\s*\z/
+
     def initialize(options={})
       self.settings = { :track_opens => MandrillActionMailer.config.track_opens, :track_clicks => MandrillActionMailer.config.track_clicks }.merge(options)
     end
@@ -21,7 +23,11 @@ module MandrillActionMailer
       }
 
       if !(message[:from_name].nil? || message[:from_name].value.blank?)
+        # If a from name is set, use it.
         message_payload[:from_name] = message[:from_name].value
+      elsif !(message[:from_email].nil?) && (m = FULL_EMAIL_REGEX.match(message[:from_email].value))
+        # If no from name is set, check to see if they set it in the email field.
+        message_payload[:from_name] = m[1]
       end
 
       if !message.reply_to.blank?

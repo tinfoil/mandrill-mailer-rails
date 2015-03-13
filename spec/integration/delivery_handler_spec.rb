@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'MandrillActionMailer::DeliverHandler' do
+describe 'MandrillActionMailer::DeliveryHandler' do
   let(:client) { double('Mandrill::API') }
   let(:sender) { double('Mandrill::Messages') }
 
@@ -39,6 +39,25 @@ describe 'MandrillActionMailer::DeliverHandler' do
     expect(sender).to receive(:send)
 
     Notifier.test.deliver
+  end
+
+  context 'delivery method accessors' do
+    before do
+      expect(sender).to receive(:send).and_return 'foo' => 'bar'
+      @mail = Notifier.test.deliver
+    end
+
+    it 'should have settings for `track_opens`' do
+      expect(@mail.delivery_method.settings[:track_opens]).to eq true
+    end
+
+    it 'should have settings for `track_clicks`' do
+      expect(@mail.delivery_method.settings[:track_clicks]).to eq false
+    end
+
+    it 'should have response from mandrill api in `result`' do
+      expect(@mail.delivery_method.result).to eq 'foo' => 'bar'
+    end
   end
 
   it 'should set the subject' do

@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version     = '1.0.0'
   s.authors     = ['Tinfoil Security, Inc.']
   s.email       = ['engineers@tinfoilsecurity.com']
-  s.homepage    = 'https://www.github.com/bsedat/mandrill-mailer-rails'
+  s.homepage    = 'https://www.github.com/tinfoil/mandrill-mailer-rails'
   s.summary     = %q{Handler for Rails to send emails through Mandrill}
   s.description = %q{Provides an ActionMailer delivery handler sending emails through Mandrill}
 

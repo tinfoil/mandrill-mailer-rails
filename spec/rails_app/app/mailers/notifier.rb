@@ -30,6 +30,10 @@ class Notifier < ActionMailer::Base
     mail from_email: FROM_EMAIL_WITH_NAME, template_name: 'test'
   end
 
+  def test_from_email_in_from
+    mail from: FROM_EMAIL_WITH_NAME, template_name: 'test'
+  end
+
   def to_many
     mail to: MANY_TO, template_name: 'test'
   end

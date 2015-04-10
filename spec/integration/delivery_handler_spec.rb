@@ -70,7 +70,7 @@ describe 'MandrillActionMailer::DeliveryHandler' do
     Notifier.test.deliver
   end
 
-  it 'should set the from field' do
+  it 'should set the from_email field' do
     expect(sender).to receive(:send).with(
       hash_including(
         :from_email => Notifier::FROM
@@ -109,6 +109,36 @@ describe 'MandrillActionMailer::DeliveryHandler' do
       )
 
       Notifier.test_from_email_with_name.deliver
+    end
+    it 'should set the from_email field' do
+      expect(sender).to receive(:send).with(
+        hash_including(
+          :from_email => Notifier::FROM
+        )
+      )
+
+      Notifier.test_from_email_with_name.deliver
+    end
+  end
+
+  context 'when the from field contains a name and email' do
+    it 'should set the from_name field' do
+      expect(sender).to receive(:send).with(
+        hash_including(
+          :from_name => Notifier::FROM_NAME
+        )
+      )
+
+      Notifier.test_from_email_in_from.deliver
+    end
+    it 'should set the from_email field' do
+      expect(sender).to receive(:send).with(
+        hash_including(
+          :from_email => Notifier::FROM
+        )
+      )
+
+      Notifier.test_from_email_in_from.deliver
     end
   end
 

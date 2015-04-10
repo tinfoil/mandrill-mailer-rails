@@ -28,9 +28,8 @@ module MandrillActionMailer
       if !(message[:from_name].nil? || message[:from_name].value.blank?)
         # If a from name is set, use it.
         message_payload[:from_name] = message[:from_name].value
-      elsif !(message[:from_email].nil?) && (m = FULL_EMAIL_REGEX.match(message[:from_email].value))
-        # If no from name is set, check to see if they set it in the email field.
-        message_payload[:from_name] = m[1]
+      elsif (from_name = parse_from_name(message))
+        message_payload[:from_name] = from_name
       end
 
       if !message.reply_to.blank?
@@ -58,6 +57,16 @@ module MandrillActionMailer
 
       content ||= message.body if message.mime_type == MIME_TYPES.fetch(format)
       content
+    end
+
+    def parse_from_name(message)
+      [:from_email, :from].each do |header|
+        if !message[header].nil? && (m = FULL_EMAIL_REGEX.match(message[header].value))
+          return m[1]
+        end
+      end
+
+      nil
     end
   end
 end

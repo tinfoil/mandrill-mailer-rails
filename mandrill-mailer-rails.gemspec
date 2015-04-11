@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'mandrill-mailer-rails'
-  s.version     = '1.0.0'
+  s.version     = '1.1.0'
   s.authors     = ['Tinfoil Security, Inc.']
   s.email       = ['engineers@tinfoilsecurity.com']
   s.homepage    = 'https://www.github.com/tinfoil/mandrill-mailer-rails'
